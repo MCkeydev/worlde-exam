@@ -3,7 +3,6 @@ import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { WordDictionaryService } from './word-dictionnary.service';
 import { WordsService, Words } from './words.service';
-import {HttpTestingController } from '@angular/common/http/testing';
 
 class FakeWordsService {
   // Define a fake words object with 5- and 6-letter word arrays
@@ -18,21 +17,16 @@ class FakeWordsService {
 }
 
 describe('WordDictionaryService', () => {
+  let words : WordsService;
   let service: WordDictionaryService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [HttpTestingController], 
-      providers: [
-        WordDictionaryService,
-        { provide: WordsService, useClass: FakeWordsService } // provide the fake WordsService
-      ]
-    });
-    service = TestBed.inject(WordDictionaryService);
+    words = new WordsService();
+    service = new WordDictionaryService(words);
   });
 
   it('should return true for a valid word', () => {
-    expect(service.isValid('apple', 5)).toBeTrue();
+    expect(service.isValid('petit', 5)).toBeTrue();
   });
 
   it('should return false for an invalid word', () => {

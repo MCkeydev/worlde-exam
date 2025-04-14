@@ -1,4 +1,5 @@
 // src/app/services/game-statistics.service.spec.ts
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { GameStatisticsService } from './game-statistics.service';
 
 describe('GameStatisticsService', () => {

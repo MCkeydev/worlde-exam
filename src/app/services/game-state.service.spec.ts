@@ -6,7 +6,6 @@ import { GameStatisticsService } from './game-statistics.service';
 import { of } from 'rxjs';
 import { Words, WordsService } from './words.service';
 import { TestBed } from '@angular/core/testing';
-import {HttpTestingController } from '@angular/common/http/testing';
 
 class FakeWordsService {
   // Define a fake words object with 5- and 6-letter word arrays
@@ -29,13 +28,13 @@ describe('GameStateService - Extended Coverage', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpTestingController], 
       providers: [
         WordDictionaryService,
         { provide: WordsService, useClass: FakeWordsService } 
       ]
     });
-    dictionary = TestBed.inject(WordDictionaryService);
+    words = new WordsService();
+    dictionary = new WordDictionaryService(words);
 
     logic = new GameLogicService();
     statistics = new GameStatisticsService();
@@ -76,7 +75,7 @@ describe('GameStateService - Extended Coverage', () => {
     service.resetGame(GameMode.Standard, 5);
     // Guess wrong 6 times (assuming dictionary prevents invalid words)
     for (let i = 0; i < 6; i++) {
-      service.makeGuess('grape'); // If 'grape' isn't the target word
+      service.makeGuess('petit'); // If 'grape' isn't the target word
     }
     expect(service.isGameOver()).toBeTrue();
   });

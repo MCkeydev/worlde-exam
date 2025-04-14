@@ -59,7 +59,7 @@ describe('WordleComponent - Extended', () => {
   it('should process a valid guess and update the history', () => {
     component.selectedMode = GameMode.Standard;
     component.selectedLength = 5;
-    component.currentGuess = 'apple';
+    component.currentGuess = 'petit';
     component.onGuess();
     expect(component.history.length).toBeGreaterThan(0);
   });

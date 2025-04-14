@@ -1,10 +1,14 @@
 // src/app/services/game-logic.service.spec.ts
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { GameLogicService, Feedback } from './game-logic.service';
+import { TestBed } from '@angular/core/testing';
 
 describe('GameLogicService', () => {
   let service: GameLogicService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({ 
+    });
     service = new GameLogicService();
   });
 

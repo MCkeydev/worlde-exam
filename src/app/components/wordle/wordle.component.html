@@ -4,24 +4,25 @@
 
   <div class="setup">
     <label>
-      Game Mode:
+      Mode de jeu:
       <select [(ngModel)]="selectedMode">
         <option *ngFor="let mode of gameModes" [value]="mode">{{ mode }}</option>
       </select>
     </label>
     <label>
-      Word Length:
+      Longueur de mot:
       <select [(ngModel)]="selectedLength">
         <option [value]="5">5</option>
         <option [value]="6">6</option>
       </select>
     </label>
-    <button (click)="startNewGame()">Start New Game</button>
+    <button (click)="startNewGame()">Nouvelle partie</button>
+    <button (click)="resetGame()">Réinitialiser</button>
   </div>
 
   <!-- Timer display for Timed mode -->
   <div class="timer" *ngIf="selectedMode === 'Timed'">
-    Time Remaining: {{ timerValue }}s
+    Temp restant: {{ timerValue }}s
   </div>
 
   <form (ngSubmit)="onGuess()" *ngIf="!gameEnded && (!selectedMode || selectedMode !== 'Timed' || timerValue > 0)">
@@ -31,15 +32,14 @@
       [maxlength]="selectedLength"
       required
       autocomplete="off"
-      placeholder="Enter a {{selectedLength}}-letter word"
+      placeholder="Entre un mot de {{selectedLength}} lettres"
     />
     <button type="submit">Guess</button>
   </form>
 
-  <button (click)="resetGame()">🔁 Reset</button>
 
   <p class="message">{{ message }}</p>
-  <div *ngIf="gameEnded" class="score">Your Score: {{ score }}</div>
+  <div *ngIf="gameEnded" class="score">Votre score: {{ score }}</div>
 
   <div class="guess-history">
     <div *ngFor="let row of history" class="guess-row">
@@ -61,9 +61,9 @@
   </div>
 
   <div class="statistics">
-    <h3>Statistics:</h3>
-    <p>Wins: {{ wins }}</p>
-    <p>Games Played: {{ gamesPlayed }}</p>
-    <p>Average Attempts: {{ averageAttempts | number:'1.1-1' }}</p>
+    <h3>Statistiques:</h3>
+    <p>Victoires: {{ wins }}</p>
+    <p>Parties jouées: {{ gamesPlayed }}</p>
+    <p>Tentatives moyennes: {{ averageAttempts | number:'1.1-1' }}</p>
   </div>
 </div>

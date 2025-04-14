@@ -1,10 +1,14 @@
 // src/app/services/word-validator.service.spec.ts
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { WordValidatorService } from './word-validator.service';
+import { TestBed } from '@angular/core/testing';
 
 describe('WordValidatorService', () => {
   let service: WordValidatorService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({ 
+    });
     service = new WordValidatorService();
   });
 
