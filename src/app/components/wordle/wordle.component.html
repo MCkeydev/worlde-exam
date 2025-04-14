@@ -19,7 +19,12 @@
     <button (click)="startNewGame()">Start New Game</button>
   </div>
 
-  <form (ngSubmit)="onGuess()" *ngIf="!gameEnded">
+  <!-- Timer display for Timed mode -->
+  <div class="timer" *ngIf="selectedMode === 'Timed'">
+    Time Remaining: {{ timerValue }}s
+  </div>
+
+  <form (ngSubmit)="onGuess()" *ngIf="!gameEnded && (!selectedMode || selectedMode !== 'Timed' || timerValue > 0)">
     <input
       [(ngModel)]="currentGuess"
       name="guess"
@@ -45,6 +50,13 @@
       >
         {{ letter.toUpperCase() }}
       </span>
+    </div>
+  </div>
+
+  <!-- Visual On-screen Keyboard -->
+  <div class="keyboard">
+    <div *ngFor="let row of keyboardRows" class="keyboard-row">
+      <span *ngFor="let key of row" class="key" [ngClass]="keyboard[key]">{{ key }}</span>
     </div>
   </div>
 

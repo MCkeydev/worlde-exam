@@ -1,58 +1,249 @@
-/* src/app/components/wordle/wordle.component.css */
-.game-container {
+/* Global Settings */
+:host {
+    display: block;
+    background-color: #f8f8f8;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #333;
+    padding: 20px;
+    height: 100vh;
+  }
+  
+  /* Container */
+  .game-container {
     max-width: 500px;
-    margin: auto;
+    margin: 0 auto;
     text-align: center;
   }
   
+  /* Header */
+  h1 {
+    font-size: 2.5rem;
+    letter-spacing: 0.1rem;
+    margin-bottom: 10px;
+    color: #222;
+  }
+  
+  /* Setup Section */
   .setup {
     margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
   }
   
   .setup label {
-    margin-right: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  .setup select {
+    font-size: 1rem;
+    padding: 5px 8px;
+    border: 1px solid #d3d6da;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  
+  .setup button {
+    font-size: 1rem;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: #6aaa64;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s;
+  }
+  
+  .setup button:hover {
+    background-color: #5a9a54;
+    transform: translateY(-2px);
+  }
+  
+  /* Timer */
+  .timer {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #555;
+  }
+  
+  /* Input Form */
+  form {
+    margin-bottom: 15px;
   }
   
   input {
     text-transform: uppercase;
-    font-size: 1.2em;
-    width: 220px;
-    margin-right: 10px;
+    font-size: 1.2rem;
+    width: 230px;
+    padding: 10px;
+    border: 2px solid #d3d6da;
+    border-radius: 4px;
+    transition: border-color 0.2s ease;
   }
   
-  .tile {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    margin: 2px;
-    font-weight: bold;
-    font-size: 1.2em;
-    border: 2px solid #ddd;
+  input:focus {
+    outline: none;
+    border-color: #6aaa64;
   }
   
-  .green {
+  /* Guess Button */
+  button[type="submit"] {
+    font-size: 1.1rem;
+    padding: 10px 20px;
+    margin-left: 8px;
+    border: none;
+    border-radius: 4px;
     background-color: #6aaa64;
-    color: white;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s;
   }
   
-  .yellow {
-    background-color: #c9b458;
-    color: white;
+  button[type="submit"]:hover {
+    background-color: #5a9a54;
+    transform: translateY(-2px);
   }
   
-  .gray {
-    background-color: #787c7e;
-    color: white;
+  /* Reset Button */
+  button:nth-of-type(2) {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #d3d6da;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s;
   }
   
+  button:nth-of-type(2):hover {
+    background-color: #c0c4c9;
+    transform: translateY(-2px);
+  }
+  
+  /* Message & Score */
+  .message {
+    font-size: 1.1rem;
+    margin: 10px 0;
+    font-weight: 500;
+  }
+  
+  .score {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 10px 0;
+  }
+  
+  /* Guess History & Grid */
   .guess-history {
     margin-top: 20px;
   }
   
+  .guess-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 6px;
+  }
+  
+  .tile {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    margin: 3px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border: 2px solid #d3d6da;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  /* Feedback Colors for Tiles */
+  .tile.green {
+    background-color: #6aaa64;
+    border-color: #6aaa64;
+    color: #fff;
+  }
+  
+  .tile.yellow {
+    background-color: #c9b458;
+    border-color: #c9b458;
+    color: #fff;
+  }
+  
+  .tile.gray {
+    background-color: #787c7e;
+    border-color: #787c7e;
+    color: #fff;
+  }
+  
+  /* Visual Keyboard */
+  .keyboard {
+    margin: 20px auto;
+    max-width: 500px;
+  }
+  
+  .keyboard-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 8px;
+    gap: 6px;
+  }
+  
+  .key {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 8px;
+    min-width: 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: 1px solid #d3d6da;
+    border-radius: 4px;
+    background-color: #eee;
+    text-transform: uppercase;
+    cursor: default;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+  }
+  
+  /* Keyboard color states */
+  .key.green {
+    background-color: #6aaa64;
+    border-color: #6aaa64;
+    color: #fff;
+  }
+  
+  .key.yellow {
+    background-color: #c9b458;
+    border-color: #c9b458;
+    color: #fff;
+  }
+  
+  .key.gray {
+    background-color: #787c7e;
+    border-color: #787c7e;
+    color: #fff;
+  }
+  
+  /* Statistics Section */
   .statistics {
-    margin-top: 20px;
-    border-top: 1px solid #ccc;
-    padding-top: 10px;
+    margin-top: 25px;
+    border-top: 1px solid #e2e2e2;
+    padding-top: 15px;
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .statistics h3 {
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    color: #333;
   }
   
