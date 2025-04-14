@@ -12,8 +12,6 @@ export class WordDictionaryService {
 
   isValid(word: string, length: number): boolean {
     // @ts-ignore
-    console.log(this.validWords[length], word);
-    // @ts-ignore
     return this.validWords[length.toString()].includes(word.toLowerCase());
   }
 
@@ -22,13 +20,6 @@ export class WordDictionaryService {
       return this.validWords["5"][0];
     }
 
-    // @ts-ignore
-    const filtered = this.validWords[length.toString()].filter(word => word.length === length);
-    if (filtered.length > 0) {
-      return filtered[Math.floor(Math.random() * filtered.length)];
-    }
-    
-    // Fall back if no words of that length exist
-    return this.validWords["5"][0];
+      return this.validWords[length][Math.floor(Math.random() * length)];
   }
 }

@@ -62,7 +62,7 @@ keyboardRows: string[][] = [
   }
 
   startNewGame() {
-    this.gameState.resetGame(this.selectedMode, this.selectedLength);
+    this.gameState.resetGame(this.selectedMode, Number(this.selectedLength));
     this.history = [];
     this.currentGuess = '';
     this.message = '';
@@ -120,7 +120,7 @@ keyboardRows: string[][] = [
     }
     const result = this.gameState.makeGuess(this.currentGuess);
     if (!result) {
-      this.message = 'Word not found in dictionary or game over.';
+      this.message = 'Mot non trouvé';
       return;
     }
     // Update guess history and visual keyboard colors.
@@ -129,7 +129,7 @@ keyboardRows: string[][] = [
     this.currentGuess = '';
 
     if (result.won) {
-      this.message = '🎉 You guessed the word!';
+      this.message = '🎉 Brao, tu as deviné!';
       this.gameEnded = true;
       this.score = result.score;
       this.stopTimer();
