@@ -12,6 +12,8 @@ export class WordDictionaryService {
 
   isValid(word: string, length: number): boolean {
     // @ts-ignore
+    console.log(word, this.validWords[length.toString()])
+    // @ts-ignore
     return this.validWords[length.toString()].includes(word.toLowerCase());
   }
 
