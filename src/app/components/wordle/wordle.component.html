@@ -1,0 +1,57 @@
+<!-- src/app/components/wordle/wordle.component.html -->
+<div class="game-container">
+  <h1>Wordle</h1>
+
+  <div class="setup">
+    <label>
+      Game Mode:
+      <select [(ngModel)]="selectedMode">
+        <option *ngFor="let mode of gameModes" [value]="mode">{{ mode }}</option>
+      </select>
+    </label>
+    <label>
+      Word Length:
+      <select [(ngModel)]="selectedLength">
+        <option [value]="5">5</option>
+        <option [value]="6">6</option>
+      </select>
+    </label>
+    <button (click)="startNewGame()">Start New Game</button>
+  </div>
+
+  <form (ngSubmit)="onGuess()" *ngIf="!gameEnded">
+    <input
+      [(ngModel)]="currentGuess"
+      name="guess"
+      [maxlength]="selectedLength"
+      required
+      autocomplete="off"
+      placeholder="Enter a {{selectedLength}}-letter word"
+    />
+    <button type="submit">Guess</button>
+  </form>
+
+  <button (click)="resetGame()">🔁 Reset</button>
+
+  <p class="message">{{ message }}</p>
+  <div *ngIf="gameEnded" class="score">Your Score: {{ score }}</div>
+
+  <div class="guess-history">
+    <div *ngFor="let row of history" class="guess-row">
+      <span
+        *ngFor="let letter of row.word.split(''); let i = index"
+        class="tile"
+        [ngClass]="row.feedback[i]"
+      >
+        {{ letter.toUpperCase() }}
+      </span>
+    </div>
+  </div>
+
+  <div class="statistics">
+    <h3>Statistics:</h3>
+    <p>Wins: {{ wins }}</p>
+    <p>Games Played: {{ gamesPlayed }}</p>
+    <p>Average Attempts: {{ averageAttempts | number:'1.1-1' }}</p>
+  </div>
+</div>
